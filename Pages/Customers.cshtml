@@ -1,0 +1,148 @@
+﻿@page
+@model V4.Pages.CustomersModel
+@{
+}
+
+
+
+<div>
+     
+    
+
+    <form method="post" asp-page-handler="Search">
+        <div class="form-group">
+            Phone <input type="text" name="phone" placeholder="Enter number to be searched" />
+            <br />
+            <label >Name is : @Model.name</label>       
+            <br />
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>    
+    </form>
+    
+ <div class="text-danger" asp-validation-summary="All"></div>
+       
+
+    <!--<div id="myGrid" style="height:500px; width:100%; padding: 10px;" class="ag-theme-alpine"></div>-->
+
+    <table class="table">
+        <tr>
+            <th>Customer name</th>
+            <th>Phone</th>
+            <th>Nationality</th>
+            <th>Options</th>
+        </tr>
+        @{ int i = 0; }
+        @foreach (var item in Model.GetCustomers)
+        {
+            <tr>               
+                <td>@item.Cname</td>
+                <td>@item.phone</td>
+                <td>@item.nationality</td>
+                <td><a class="btn btn-warning" asp-page="AddCustomer" asp-route-Id="@item.Id">Edit Customers</a></td>
+                <td><a class="btn btn-outline-success" asp-page="CustomerHistory" asp-route-Id="@item.Id">View Customer</a></td>
+                <td><Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete_@i">Delete</Button></td>
+
+                <td>
+                    <div class="modal fade" id="Delete_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id">
+
+                                        <p>Are you sure you want to delete this record? </p>
+
+                                        <input type="submit" value="Yes" class="btn btn-primary" />
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            i++;           
+        }
+    </table>
+
+</div>
+
+@section Scripts
+
+
+{
+    <script>
+
+
+        const columnDefs = [
+            { field: "Id" },
+            { field: "CustomerName", sortable: true, width: 100 },
+            { field: "Phone" },
+            { field: "Nationality" },
+
+        ];
+
+
+        var rowData;
+        rowData = [];
+
+        var count = @Model.GetCustomers.Count();
+
+        
+
+            @foreach(var c in Model.GetCustomers){
+                    var id = c.Id;
+                    var name = c.Cname;
+                    var ph = c.phone;
+                    var n = c.nationality;
+                
+
+                    
+
+            }
+        
+        
+
+
+
+
+            /*
+        const rowData = [
+            {Id:2,CustomerName:"mohammad",Phone:"8878881",Nationality:"lb"}
+        ]*/
+
+
+
+
+
+        // let the grid know which columns and what data to use
+        const gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData,
+            defaultColDef: {
+                sortable: true,
+                flex: 1,
+                minWidth: 100,
+                filter: true,
+                resizable: true,
+            }
+
+        };
+
+        // setup the grid after the page has finished loading
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridDiv = document.querySelector('#myGrid');
+            new agGrid.Grid(gridDiv, gridOptions);
+        });
+
+
+
+
+    </script>
+}

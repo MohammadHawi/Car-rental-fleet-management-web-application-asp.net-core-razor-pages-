@@ -1,0 +1,45 @@
+﻿@page
+@model V4.Pages.SalesModel
+@{
+    
+}
+
+
+<div>
+    <h1>Total of this month is : @Model.Total$ </h1>
+</div>
+
+<table class=" table table-hover">
+    <tr>
+        <th>Plate</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+
+    @foreach (var item in Model.GetSales)
+    {
+        <tr>
+            <td>@item.Plate</td>
+            <td>@item.Amount</td>
+            <td>@item.Date</td>
+        </tr>
+    }
+
+
+</table>
+
+<form>
+    <div>
+        <label>From date </label>
+        <input type="datetime" />
+    </div>
+    <div>
+        <label>To date</label>
+        <input type="datetime" />
+    </div>
+    <div>
+        <label>Plate</label>
+        <input type="text" />
+    </div>
+    <button type="submit">Calculate sales</button>
+</form>

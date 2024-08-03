@@ -1,0 +1,42 @@
+﻿@page
+@model V4.Pages.AddCustomerModel
+@{
+   
+}
+
+<form method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+             <label asp-for="c.Cname"></label>
+             <br />
+             <input type="text" asp-for="@Model.c.Cname"/>
+             </div>
+         </div>
+         <div class="form-row">   
+            <div class="form-group col-md-6">
+             <label asp-for="c.phone"></label>
+             <br />
+             <input type="text" asp-for="@Model.c.phone "/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+             <label asp-for="c.nationality"></label>
+             <br />
+             <input type="text" asp-for="@Model.c.nationality"/>
+            </div>
+        </div>
+        <div class="form-row">
+             <label asp-for="c.PassPort"></label>
+             <br />
+             <input type="file" asp-for="@Model.c.PassPort"/>
+        </div>
+        <br />
+        <div asp-validation-summary="All" class="alert-danger">
+            Name stored in database is @Model.Cname
+        </div>
+         <input type="submit" value="Add" class="btn btn-primary" />
+         <input type="submit" value="Update" class="btn btn-secondary" asp-page-handler="Update" asp-route-id="@Model.c.Id" />
+         <button asp-page="Customers">Return to list</button>
+           
+    </form>

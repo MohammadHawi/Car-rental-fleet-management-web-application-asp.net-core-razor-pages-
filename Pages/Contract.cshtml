@@ -1,0 +1,198 @@
+﻿@page
+@model V4.Pages.ContractModel
+@{
+}
+
+<div>
+    <!-- Button trigger modal -->
+    
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">    
+                    <form method="post" class="row g-3" asp-page-handler="Add">
+
+
+
+                        <div class="col-md-6">
+                            <label class="form-label">Plate</label>
+                            <input type="text" asp-for="Contract.Plate" placeholder="plate number" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Contract.Plate"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" >Customer name</label>
+                            <input type="text" asp-for="Contract.Cname" placeholder="Customer in database" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Contract.Cname"></span>
+                        </div>
+                        <br>
+                        <div class="col-md-6">
+                            <label class="form-label">Pick Out</label>
+                            <input type="date" asp-for="Contract.CheckOut" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Contract.CheckOut"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop in</label>
+                            <input type="date" asp-for="Contract.CheckIn" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Contract.CheckIn"></span>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Advanced payment</label>
+                            <input type="number" asp-for="Contract.Paid" class="form-control" style="float:right" />
+                            <span class="text-danger" asp-validation-for="Contract.Paid"></span>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-label">Price/day</label>
+                            <input type="text" asp-for="Contract.Price" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Contract.Price"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Note</label>
+                            <input type="text" asp-for="Contract.Note"class="form-control" />
+                        </div>
+
+                        
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                            <button type="submit" class="btn btn-primary">إضافة</button>
+                            <span class="text-danger" asp-validation-summary="All"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h5>Number of car rented : @Model.GetContracts.Count()</h5>
+    
+
+    <!-- Modal for returned -->
+    
+
+
+</div>
+
+<div>
+    <span asp-validation-summary="All"></span>
+</div>
+
+<table class=" table table-hover">
+    <tr>
+        <th>Plate</th>
+        <th>Customer</th>
+        <th>Pick out</th>
+        <th>Drop in</th>
+        <th>Price</th>
+        <th>Payment</th>
+        <th>Rest</th>
+        <th>Note</th>
+        <th>Options</th>
+    </tr>
+
+    @{ int i = 0; }
+    @foreach (var item in Model.GetContracts)
+    {
+        <tr>
+
+
+            <td>@item.Plate</td>
+            <td>@item.Cname</td>
+            <td >@item.CheckOut.ToString("dd/MM/yyyy")</td>
+            <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
+            <td>@item.Price</td>
+            <td>@item.Paid</td>
+            <td>@item.Deposit</td>
+            <td>@item.Note</td>
+            
+
+
+            <td><Button type="button" class="btn btn-success" data-toggle="modal" data-target="#Returned_@i">Close</Button></td>
+
+            
+            <td><a class="btn btn-warning" asp-page="CheckOut" asp-route-Id="@item.Id">Extend</a></td>
+
+            <td><a class="btn btn-secondary" asp-page="CustomerHistory" asp-route-Id="@item.CID">View Customer</a> </td>
+
+            <td><Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete_@i">Delete</Button></td>
+
+            <td>
+                <div class="modal fade" id="Delete_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id">
+
+                                    <p>Are you sure you want to delete this record? </p>
+
+                                    <input type="submit" value="Yes" class="btn btn-primary" />
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="modal fade" id="Returned_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="Returned" asp-route-id="@item.Id">
+
+                                    <input type="date" asp-for="@Model.Update" />
+
+                                    <input type="submit" class="btn btn-primary" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+
+        </tr>
+        i++;
+
+
+    }
+
+</table>
+
+@section Scripts{ 
+
+    <script type="text/javascript">
+
+        
+    </script>
+}

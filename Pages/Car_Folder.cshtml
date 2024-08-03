@@ -1,0 +1,35 @@
+﻿@page
+@model V4.Pages.Car_FolderModel
+@{
+    
+}
+
+<table class="table">
+    <tr>
+        <th>Plate</th>
+        <th>Name</th>
+        
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Price</th>
+        
+        <th>Note</th>
+    </tr>
+
+    @foreach (var item in Model.GetContracts)
+    {
+        <tr>
+            <td>@item.Plate</td>
+            <td>@item.Cname</td>           
+            <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
+            <td>@item.CheckOut.ToString("dd/MM/yyyy")</td>
+            <td>@item.Price</td>
+            <td>@item.Note</td>
+            
+        </tr>
+    }
+
+</table>
+<div class="text-center">
+    <a class="btn-outline-danger" asp-page="/Cars">Return to list</a>
+</div>

@@ -1,0 +1,61 @@
+﻿@page
+@model V4.Pages.OverDateModel
+@{
+}
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Plate</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Pick Out</th>
+            <th>Drop In</th>
+        </tr>
+
+        @{ int i = 0; }
+        @foreach (var item in Model.GetContracts)
+        {
+            
+    <tr>
+        
+        
+        <td>@item.Plate</td>
+        <td>@item.Cname</td>
+        <td>@item.Price</td>
+        <td>@item.CheckOut.ToString("dd/MM/yyyy")</td>
+        <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
+        <td><a class="btn btn-primary" asp-page="CheckOut" asp-route-Id="@item.Id">Extend</a></td>
+        <td><a class="btn btn-secondary" asp-page="CustomerHistory" asp-route-Id="@item.CID">View Customer</a> </td>
+        <td><Button type="button" class="btn btn-success" data-toggle="modal" data-target="#Returned_@i">Close</Button></td>
+        
+        
+        <td>
+                <div class="modal fade" id="Returned_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="Returned" asp-route-id="@item.Id">
+
+                                    <input type="date" asp-for="@Model.Update" />
+
+                                    <input type="submit" class="btn btn-primary" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            </tr>
+            i++;
+        }
+        
+    </table>
+</div>

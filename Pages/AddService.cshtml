@@ -1,0 +1,59 @@
+﻿@page
+@model V4.Pages.AddServiceModel
+@{
+}
+
+
+<form method="post" >
+    <div class="mx-auto" style="width:99%">
+    <div class="row mb-3" style="width:40%"> 
+        <label class="col-sm-2 col-form-label" >Plate number</label>
+            <div class="col-sm">
+                <input type="number" class="form-control" asp-for="service.Plate" style="width:20%" />
+            </div>
+    </div>
+    
+    <div class="row mb-3" style="width:40%">
+        <label class="col-sm-2 col-form-label" >ODO</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" asp-for="service.KiloMeter" style="width:20%" />
+            </div>
+    </div>
+
+    <div class="row mb-3" style="width:40%">
+        <label class="col-sm-2 col-form-label" >Date</label>
+            <div class="col-sm-10">
+            <input type="date" class="form-control" asp-for="service.Date" style="width:40%" />
+            </div>
+    </div>
+
+    
+
+
+    @foreach (var type in Model.Types)
+    {
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="service.Type" value="@type"/>
+                <label class="form-check-label">@type</label>
+            </div>
+        </div>
+        
+    }
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label" >Please specify type of serive (for other) </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" asp-for="service.Note" style="width:40%" />
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="col-12" asp-validation-summary="All">
+    </div>  
+
+    <button type="Submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

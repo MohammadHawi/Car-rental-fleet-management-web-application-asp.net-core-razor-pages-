@@ -1,0 +1,40 @@
+﻿@page
+@model V4.Pages.ViewServicesModel
+
+
+<h1>Cars that needs service : </h1>
+<table class="table table-info">
+    <tr>
+        <th>Plate</th>
+    </tr>
+    <tr>
+    @foreach (var item in Model.NeedServiceList)
+    {
+            <td>@item</td>
+            
+        }
+    </tr>
+</table>
+
+
+<table class="table table-info">
+    <tr>
+        <th>Plate</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>ODO</th>
+        <th>Note</th>
+    </tr>
+
+
+@foreach(var item in Model.GetServices)
+{
+    <tr>
+        <td>@item.Plate</td>
+        <td>@item.Type</td>
+        <td>@item.Date</td>
+        <td>@item.KiloMeter</td>
+        <td>@item.Note</td>       
+    </tr>
+}
+</table>

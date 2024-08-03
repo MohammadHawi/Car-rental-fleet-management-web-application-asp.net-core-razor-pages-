@@ -1,0 +1,31 @@
+﻿@page
+@model V4.Pages.AvailableCarsModel
+@{
+    
+}
+
+<h5>Nunber of available cars : @Model.GetCars.Count()</h5>
+
+<div>
+    <table class="table table-hover">
+        <tr>
+            <th>Plate</th>
+            <th>Brand</th>
+            <th>Class</th>
+            <th>Model</th>
+            <th>Color</th>
+        </tr>
+
+        @foreach (var item in Model.GetCars)
+        {
+            <tr>
+                <td>@item.Plate</td>
+                <td>@item.Brand</td>
+                <td>@item.Class</td>
+                <td>@item.Model</td>
+                <td>@item.Color</td>
+                <td><a class="btn btn-info" asp-page="Car_Folder" asp-route-id="@item.Plate">View Folder</a></td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,98 @@
+﻿@page
+@model V4.Pages.AddContractModel
+@{
+  
+}
+
+<form method="post" class="row g-3">
+
+        <div class="col-md-6">
+            <label class="form-label">Plate</label>
+            <input type="text" asp-for="Contract.Plate" placeholder="plate number" class="form-control" />
+            <span class="text-danger" asp-validation-for="Contract.Plate"></span>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" >Customer name</label>
+            <input type="text" asp-for="Contract.Cname" placeholder="Customer in database" class="form-control" />
+            <span class="text-danger" asp-validation-for="Contract.Cname"></span>
+        </div>
+        <br>
+        <div class="col-md-6">
+            <label class="form-label">Pick Out</label>
+            <input type="date" asp-for="Contract.CheckOut" class="form-control" />
+            <span class="text-danger" asp-validation-for="Contract.CheckOut"></span>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Drop in</label>
+            <input type="date" asp-for="Contract.CheckIn" class="form-control" />
+            <span class="text-danger" asp-validation-for="Contract.CheckIn"></span>
+        </div>
+        <br>
+        <br>
+        <br>
+               
+        <div class="col-md-4">
+            <label class="form-label">Price/day</label>
+            <input type="text" asp-for="Contract.Price" class="form-control" />
+            <span class="text-danger" asp-validation-for="Contract.Price"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Advanced payment</label>
+            <input type="number" asp-for="Contract.Paid" class="form-control" style="float:right" />
+            <span class="text-danger" asp-validation-for="Contract.Paid"></span>
+        </div>
+
+    <div class="col-md-4">
+        <label class="form-label">ODO</label>
+        <input type="number" asp-for="ODO" class="form-control" style="float:right" />
+        <span class="text-danger"></span>
+    </div>
+        
+
+        <div class="col-12">
+            <label class="form-label">Note</label>
+            <input type="text" asp-for="Contract.Note"class="form-control" />
+        </div>
+
+          <br />
+          <br />
+          
+        <div class="col-12" asp-validation-summary="All">
+            
+        </div>
+        <div class="col-12">
+            <br />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">إضافة</button>
+            
+        </div>
+</form>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>This user is not in the database</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    
+
+    if (@Model.i ==0)
+    {
+
+        $("#exampleModal").modal('show');
+    }
+</script>

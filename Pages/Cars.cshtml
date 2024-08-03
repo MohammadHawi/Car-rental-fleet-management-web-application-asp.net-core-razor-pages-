@@ -1,0 +1,40 @@
+﻿@page
+@model V4.Pages.CarsModel
+@{
+}
+
+<div>
+    <form method="post">
+        <div class="form-group">
+            Plate <input type="text" name="Plate" />
+            Brand <input type="text" name="Brand" />
+            Class <input type="text" name="Class" />
+            Model <input type="text" name="Model" />
+            Color <input type="text" name="Color" />
+            <input type="submit" value="Add car" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <table class="table">
+        <tr>
+            <th>Plate</th>
+            <th>Brand</th>
+            <th>Class</th>
+            <th>Model</th>
+            <th>Color</th>
+        </tr>
+
+        @foreach (var item in Model.GetCars)
+        {
+            <tr>
+                <td>@item.Plate</td>
+                <td>@item.Brand</td>
+                <td>@item.Class</td>
+                <td>@item.Model</td>
+                <td>@item.Color</td>
+                <td><a class="btn btn-info" asp-page="Car_Folder" asp-route-id="@item.Plate">View Folder</a></td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,45 @@
+﻿@page
+@model V4.Pages.CustomerHistoryModel
+@{
+}
+
+
+
+<table class=" table table-hover">
+
+    <tr>
+        <td>@Model.customer.Cname</td>
+        <td>@Model.customer.phone</td>
+        <td>@Model.customer.nationality</td>
+        
+    </tr>
+
+    <tr>
+        <th>Plate</th>
+        <th>Pick out</th>
+        <th>Drop in</th>
+        <th>Price</th>
+        
+    </tr>
+
+    
+    @foreach (var item in Model.GetContracts)
+    {
+
+        <tr>
+
+
+            <td>@item.Plate</td>
+            <td >@item.CheckOut.ToString("dd/MM/yyyy")</td>
+            <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
+            <td>@item.Price</td>
+           
+
+
+        </tr>
+       
+
+
+    }
+
+</table>

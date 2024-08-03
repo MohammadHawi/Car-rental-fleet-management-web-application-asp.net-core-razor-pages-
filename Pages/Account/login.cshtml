@@ -1,0 +1,41 @@
+﻿@page "/"
+@model V4.Pages.loginModel
+@{
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/loginstyle.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="/lib/Images/logo.jpg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form method="post">
+      <input type="text" id="login" class="fadeIn second" name="username" asp-for="@Model.l.Username" placeholder="login">
+      <input type="text" id="password" class="fadeIn third" name="password" asp-for="@Model.l.Password" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+      <div class="col-12" asp-validation-summary="All">
+          </div>
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
+
+

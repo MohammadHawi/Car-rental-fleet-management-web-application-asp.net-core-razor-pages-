@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\NeedServiceList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\NeedServiceList.cshtml" />
+    <None Include="wwwroot\css\loginstyle.css" />
+    <None Include="wwwroot\lib\Images\logo.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\NeedServiceList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\NeedServiceList.cshtml" />
+  </ItemGroup>
+
+</Project>
